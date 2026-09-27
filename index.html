@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    /* Live Clock */
+    .clock-widget {
+      text-align: center;
+    }
+
+    .time {
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: #ffffff;
+    }
+
+    .date {
+      font-size: 1rem;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+
+    /* Search Box */
+    .search-box {
+      width: 100%;
+    }
+
+    .search-box form {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 1rem;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      background: #1e293b;
+      color: #ffffff;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    /* Bookmarks Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 16px;
+      width: 100%;
+    }
+
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 18px 12px;
+      border-radius: 12px;
+      text-align: center;
+      text-decoration: none;
+      color: #e2e8f0;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card:hover {
+      background: #334155;
+      border-color: #64748b;
+      transform: translateY(-2px);
+    }
+
+    .card img {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Clock -->
+    <div class="clock-widget">
+      <div class="time" id="clock">00:00</div>
+      <div class="date" id="date">--</div>
+    </div>
+
+    <!-- Google Search -->
+    <div class="search-box">
+      <form action="https://www.google.com/search" method="GET">
+        <input 
+          type="text" 
+          name="q" 
+          class="search-input" 
+          placeholder="Google पर खोजें या URL दर्ज करें..." 
+          autocomplete="off" 
+          autofocus
+        >
+      </form>
+    </div>
+
+    <!-- Quick Links Grid -->
+    <div class="grid">
+      <a href="https://github.com" class="card">
+        <img src="https://www.google.com/s2/favicons?domain=github.com&sz=64" alt="GitHub">
+        <span>GitHub</span>
+      </a>
+      <a href="https://youtube.com" class="card">
+        <img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" alt="YouTube">
+        <span>YouTube</span>
+      </a>
+      <a href="https://web.whatsapp.com" class="card">
+        <img src="https://www.google.com/s2/favicons?domain=web.whatsapp.com&sz=64" alt="WhatsApp">
+        <span>WhatsApp</span>
+      </a>
+      <a href="https://chatgpt.com" class="card">
+        <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT">
+        <span>ChatGPT</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      
+      const timeStr = now.toLocaleTimeString([], { 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        hour12: true 
+      });
+
+      const dateStr = now.toLocaleDateString('hi-IN', { 
+        weekday: 'long', 
+        day: 'numeric', 
+        month: 'short' 
+      });
+
+      document.getElementById('clock').textContent = timeStr;
+      document.getElementById('date').textContent = dateStr;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>
