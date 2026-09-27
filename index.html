@@ -3,308 +3,295 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Ankur Dashboard</title>
+  <title>New Tab</title>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
-      background: radial-gradient(circle at 10% 20%, #1e1b4b 0%, #090d16 90%);
-      color: #f8fafc;
+      background-color: #1f1f1f;
+      color: #e8eaed;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 24px 16px;
+      padding: 20px;
     }
 
     .container {
       width: 100%;
-      max-width: 600px;
+      max-width: 580px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 22px;
+      gap: 28px;
     }
 
-    /* Glassmorphism Card Style */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 20px;
-    }
-
-    /* Clock & Date Header */
-    .header-widget {
-      text-align: center;
-    }
-
-    .time {
-      font-size: 3.8rem;
-      font-weight: 700;
-      letter-spacing: -1.5px;
-      background: linear-gradient(180deg, #ffffff 40%, #94a3b8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1.1;
-    }
-
-    .date {
-      font-size: 1.05rem;
-      color: #94a3b8;
-      margin-top: 6px;
-      font-weight: 400;
-    }
-
-    /* Weather & Info Bar */
-    .weather-pill {
-      display: inline-flex;
+    /* Minimal Top Info Bar */
+    .top-bar {
+      display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 18px;
-      border-radius: 9999px;
+      justify-content: center;
+      gap: 12px;
+      color: #9aa0a6;
       font-size: 0.95rem;
+    }
+
+    .clock {
+      font-size: 2.2rem;
       font-weight: 500;
-      color: #38bdf8;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .weather-temp {
-      font-weight: 700;
       color: #ffffff;
+      letter-spacing: -0.5px;
     }
 
-    /* Featured Tech Ankur Card */
-    .featured-card {
+    .dot {
+      opacity: 0.5;
+    }
+
+    /* Clean Google Search Box */
+    .search-wrapper {
       width: 100%;
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      text-decoration: none;
-      color: #ffffff;
-      transition: all 0.25s ease;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(56, 189, 248, 0.25);
     }
 
-    .featured-card:hover {
-      transform: translateY(-3px);
-      background: rgba(56, 189, 248, 0.1);
-      border-color: #38bdf8;
-    }
-
-    .avatar-wrapper {
-      position: relative;
-      width: 60px;
-      height: 60px;
-      flex-shrink: 0;
-    }
-
-    .avatar-img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #38bdf8;
-    }
-
-    .featured-details h2 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .featured-details p {
-      font-size: 0.85rem;
-      color: #94a3b8;
-      margin-top: 2px;
-    }
-
-    .badge {
-      font-size: 0.7rem;
-      padding: 2px 8px;
-      background: #0284c7;
-      color: #ffffff;
-      border-radius: 6px;
-      font-weight: 600;
-    }
-
-    /* Google Search Box */
     .search-box {
       width: 100%;
+      display: flex;
+      align-items: center;
+      background: #2d2e30;
+      border-radius: 28px;
+      padding: 0 18px;
+      height: 52px;
+      border: 1px solid transparent;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.28);
+      transition: background 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .search-box:focus-within {
+      background: #303134;
+      border-color: #5f6368;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.45);
+    }
+
+    .search-box svg {
+      width: 20px;
+      height: 20px;
+      fill: #9aa0a6;
+      flex-shrink: 0;
+      margin-right: 14px;
     }
 
     .search-input {
-      width: 100%;
-      padding: 15px 22px;
-      font-size: 1rem;
-      border-radius: 16px;
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: #ffffff;
+      flex: 1;
+      height: 100%;
+      background: transparent;
+      border: none;
       outline: none;
-      transition: all 0.2s;
+      color: #ffffff;
+      font-size: 1rem;
     }
 
-    .search-input:focus {
-      border-color: #38bdf8;
-      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15);
-      background: rgba(15, 23, 42, 0.85);
+    .search-input::placeholder {
+      color: #9aa0a6;
     }
 
-    /* Bookmarks Grid */
-    .grid {
+    /* Browser-style Shortcuts Grid */
+    .shortcuts-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 20px 14px;
       width: 100%;
+      max-width: 480px;
+      margin-top: 8px;
     }
 
-    .quick-link {
-      padding: 14px 10px;
+    .shortcut-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
       text-decoration: none;
-      color: #cbd5e1;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
+      gap: 8px;
     }
 
-    .quick-link img {
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
+    .icon-wrapper {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #2d2e30;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+      overflow: hidden;
     }
 
-    .quick-link:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-2px);
-      color: #ffffff;
+    .shortcut-item:active .icon-wrapper {
+      transform: scale(0.92);
+      background: #3c4043;
+    }
+
+    .icon-wrapper img {
+      width: 26px;
+      height: 26px;
+      object-fit: cover;
+    }
+
+    /* Your Profile Avatar Icon */
+    .icon-wrapper.my-avatar img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .shortcut-title {
+      font-size: 0.78rem;
+      color: #e8eaed;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 72px;
+      font-weight: 400;
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <!-- Clock & Date -->
-    <div class="header-widget">
-      <div class="time" id="clock">00:00</div>
-      <div class="date" id="date">--</div>
+    <!-- Header: Time, Date & Live Temperature -->
+    <div style="text-align: center;">
+      <div class="clock" id="clock">--:--</div>
+      <div class="top-bar" style="margin-top: 4px;">
+        <span id="date">--</span>
+        <span class="dot">•</span>
+        <span id="weather">28°C साफ़</span>
+      </div>
     </div>
 
-    <!-- Weather Pill -->
-    <div class="weather-pill glass-card" id="weatherWidget">
-      <span>🌤️</span>
-      <span id="weatherText">मौसम लोड हो रहा है...</span>
-    </div>
-
-    <!-- Main Tech Ankur Card -->
-    <a href="https://techankur12.blogspot.com" target="_blank" class="featured-card glass-card">
-      <div class="avatar-wrapper">
-        <img src="avatar.png" alt="Tech Ankur" class="avatar-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'">
-      </div>
-      <div class="featured-details">
-        <h2>Tech Ankur <span class="badge">Official</span></h2>
-        <p>https://techankur12.blogspot.com • जाने के लिए टैप करें ↗</p>
-      </div>
-    </a>
-
-    <!-- Google Search Form -->
-    <div class="search-box">
-      <form action="https://www.google.com/search" method="GET">
+    <!-- Authentic Search Box -->
+    <div class="search-wrapper">
+      <form action="https://www.google.com/search" method="GET" class="search-box">
+        <svg viewBox="0 0 24 24">
+          <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        </svg>
         <input 
           type="text" 
           name="q" 
           class="search-input" 
-          placeholder="Google पर खोजें या टाइप करें..." 
+          placeholder="खोजें या वेब पता डालें" 
           autocomplete="off"
         >
       </form>
     </div>
 
-    <!-- Quick Shortcuts -->
-    <div class="grid">
-      <a href="https://www.youtube.com" class="quick-link glass-card">
-        <img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" alt="YouTube">
-        <span>YouTube</span>
+    <!-- Quick Shortcuts Grid -->
+    <div class="shortcuts-grid">
+      <!-- 1. Tech Ankur (Your Own Site) -->
+      <a href="https://techankur12.blogspot.com" class="shortcut-item">
+        <div class="icon-wrapper my-avatar">
+          <img src="avatar.png" alt="Tech Ankur" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'">
+        </div>
+        <span class="shortcut-title">Tech Ankur</span>
       </a>
-      <a href="https://chatgpt.com" class="quick-link glass-card">
-        <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT">
-        <span>ChatGPT</span>
+
+      <!-- 2. YouTube -->
+      <a href="https://www.youtube.com" class="shortcut-item">
+        <div class="icon-wrapper">
+          <img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" alt="YouTube">
+        </div>
+        <span class="shortcut-title">YouTube</span>
       </a>
-      <a href="https://github.com" class="quick-link glass-card">
-        <img src="https://www.google.com/s2/favicons?domain=github.com&sz=64" alt="GitHub">
-        <span>GitHub</span>
+
+      <!-- 3. GitHub -->
+      <a href="https://github.com" class="shortcut-item">
+        <div class="icon-wrapper">
+          <img src="https://www.google.com/s2/favicons?domain=github.com&sz=64" alt="GitHub">
+        </div>
+        <span class="shortcut-title">GitHub</span>
       </a>
-      <a href="https://web.whatsapp.com" class="quick-link glass-card">
-        <img src="https://www.google.com/s2/favicons?domain=whatsapp.com&sz=64" alt="WhatsApp">
-        <span>WhatsApp</span>
+
+      <!-- 4. ChatGPT -->
+      <a href="https://chatgpt.com" class="shortcut-item">
+        <div class="icon-wrapper">
+          <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT">
+        </div>
+        <span class="shortcut-title">ChatGPT</span>
+      </a>
+
+      <!-- 5. WhatsApp Web -->
+      <a href="https://web.whatsapp.com" class="shortcut-item">
+        <div class="icon-wrapper">
+          <img src="https://www.google.com/s2/favicons?domain=whatsapp.com&sz=64" alt="WhatsApp">
+        </div>
+        <span class="shortcut-title">WhatsApp</span>
+      </a>
+
+      <!-- 6. Google Translate -->
+      <a href="https://translate.google.com" class="shortcut-item">
+        <div class="icon-wrapper">
+          <img src="https://www.google.com/s2/favicons?domain=translate.google.com&sz=64" alt="Translate">
+        </div>
+        <span class="shortcut-title">Translate</span>
+      </a>
+
+      <!-- 7. Instagram -->
+      <a href="https://www.instagram.com" class="shortcut-item">
+        <div class="icon-wrapper">
+          <img src="https://www.google.com/s2/favicons?domain=instagram.com&sz=64" alt="Instagram">
+        </div>
+        <span class="shortcut-title">Instagram</span>
+      </a>
+
+      <!-- 8. Gmail -->
+      <a href="https://mail.google.com" class="shortcut-item">
+        <div class="icon-wrapper">
+          <img src="https://www.google.com/s2/favicons?domain=mail.google.com&sz=64" alt="Gmail">
+        </div>
+        <span class="shortcut-title">Gmail</span>
       </a>
     </div>
   </div>
 
   <script>
-    // 1. Live Clock & Hindi Date
+    // Live Clock & Date
     function updateClock() {
       const now = new Date();
-      const timeStr = now.toLocaleTimeString('en-US', { 
+      document.getElementById('clock').textContent = now.toLocaleTimeString([], { 
         hour: '2-digit', 
         minute: '2-digit', 
-        hour12: true 
+        hour12: false 
       });
-      const dateStr = now.toLocaleDateString('hi-IN', { 
-        weekday: 'long', 
+
+      document.getElementById('date').textContent = now.toLocaleDateString('hi-IN', { 
+        weekday: 'short', 
         day: 'numeric', 
         month: 'short' 
       });
-
-      document.getElementById('clock').textContent = timeStr;
-      document.getElementById('date').textContent = dateStr;
     }
     setInterval(updateClock, 1000);
     updateClock();
 
-    // 2. Real-time Weather Fetching
-    function fetchWeather(lat, lon, label) {
-      fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`)
-        .then(res => res.json())
-        .then(data => {
-          const temp = Math.round(data.current.temperature_2m);
-          document.getElementById('weatherWidget').innerHTML = `
-            <span>📍 ${label}</span>
-            <span class="weather-temp">${temp}°C</span>
-          `;
+    // Auto Weather
+    function fetchWeather(lat, lon) {
+      fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m`)
+        .then(r => r.json())
+        .then(d => {
+          const t = Math.round(d.current.temperature_2m);
+          document.getElementById('weather').textContent = `${t}°C साफ़`;
         })
-        .catch(() => {
-          document.getElementById('weatherWidget').innerHTML = `<span>🌤️ 28°C • साफ़ मौसम</span>`;
-        });
+        .catch(() => {});
     }
 
-    // Auto Geo-Location / Default Fallback
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          fetchWeather(pos.coords.latitude, pos.coords.longitude, 'Live Weather');
-        },
-        () => {
-          fetchWeather(26.79, 82.80, 'Basti, UP'); // Default Location
-        }
+        p => fetchWeather(p.coords.latitude, p.coords.longitude),
+        () => fetchWeather(26.79, 82.80)
       );
     } else {
-      fetchWeather(26.79, 82.80, 'Basti, UP');
+      fetchWeather(26.79, 82.80);
     }
   </script>
 </body>
